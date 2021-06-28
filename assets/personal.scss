@@ -1,0 +1,276 @@
+.person_bg{
+	height: 708rpx;
+	position: relative;
+}
+.person_image_blur{
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+}
+.img_zhezhao{
+	width: 750rpx;
+	height: 708rpx;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #333333;
+	opacity: 0.5;
+}
+.content {
+	width: 100%;
+	padding-bottom: 180rpx;
+	position: absolute;
+	left: auto;
+	top: 100rpx;
+}
+
+.more {
+	margin-right: 31rpx;
+}
+
+.user_info {
+	width: 580rpx;
+	height: 580rpx;
+	margin: 0 auto;
+	margin-top: 48rpx;
+	text-align: center;
+
+	.user_img {
+		width: 184rpx;
+		height: 184rpx;
+		margin: 0 auto;
+		image{
+			border-radius: 50%;
+		}
+	}
+
+	.nick_name {
+		color: #FFFFFF;
+		font-size: 36rpx;
+		font-weight: bold;
+		margin-top: 38rpx;
+		justify-content: center;
+	}
+
+	.rz_icon {
+		width: 156rpx;
+		height: 36rpx;
+		margin: 16rpx auto;
+	}
+
+	.r_bottom{
+		justify-content: center;
+	}
+	.b_label {
+		background: #FFFFFF;
+		color: #B46628;
+		font-size: 26rpx;
+		font-weight: 400;
+		font-family: Source Han Sans CN;
+		padding: 8rpx 18rpx;
+	}
+
+	.intro {
+		color: #FFFFFF;
+		font-size: 24rpx;
+		margin-top: 48rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+}
+
+.c_tabs {
+	width: 320rpx;
+}
+
+.resource {
+	padding: 40rpx 30rpx;
+
+	.res_item {
+		margin-bottom: 40rpx;
+
+		.title {
+			color: #333333;
+			font-size: 28rpx;
+			margin-bottom: 30rpx;
+			font-weight: 500;
+
+			text {
+				color: #B46628;
+				font-size: 22rpx;
+				margin-left: 30rpx;
+			}
+		}
+
+		.chat_img {
+			width: 686rpx;
+			height: 98rpx;
+		}
+
+		.albums {
+			// flex-wrap: wrap;
+
+			.photo {
+				width: 150rpx;
+				height: 150rpx;
+				margin-right: 30rpx;
+				position: relative;
+				border-radius: 8rpx;
+				flex-shrink: 0;
+
+				.hot_icon {
+					width: 40rpx;
+					height: 40rpx;
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+
+				.benren_icon {
+					width: 54rpx;
+					height: 28rpx;
+					position: absolute;
+					right: 0;
+					top: 0;
+				}
+			}
+		}
+
+		.info_items {
+			flex-wrap: wrap;
+
+			.info_item {
+				width: 208rpx;
+				background-color: #F8F8F8;
+				border-radius: 8rpx;
+				padding: 20rpx;
+				color: #888888;
+				font-size: 22rpx;
+				margin-bottom: 20rpx;
+			}
+
+			.info_value {
+				color: #333333;
+				font-size: 26rpx;
+				font-weight: 500;
+				margin-top: 16rpx;
+				letter-spacing: 0.5px;
+			}
+		}
+
+		.hobbies {
+			flex-wrap: wrap;
+
+			.hobby {
+				padding: 14rpx 30rpx;
+				background-color: #F8F8F8;
+				font-size: 24rpx;
+				border-radius: 30rpx;
+				margin-right: 30rpx;
+				margin-bottom: 20rpx;
+			}
+		}
+
+		.score_items {
+			flex-wrap: wrap;
+
+			.score {
+				margin-bottom: 20rpx;
+
+				text {
+					margin-right: 20rpx;
+					color: #B46628;
+					font-size: 22rpx;
+				}
+			}
+		}
+	}
+}
+
+.dy_items {
+	padding: 40rpx 30rpx;
+
+	.item {
+		font-size: 32rpx;
+		color: #333333;
+		margin-bottom: 40rpx;
+
+		.dy_info {
+			align-items: flex-start;
+
+			.avater {
+				width: 102rpx;
+				height: 102rpx;
+				margin-right: 18rpx;
+			}
+
+			.intro {
+				font-size: 24rpx;
+				color: #666666;
+				margin-top: 12rpx;
+			}
+
+			.right {
+				font-size: 24rpx;
+				color: #999999;
+			}
+		}
+
+		.dy_content {
+			padding-left: 112rpx;
+			margin-top: 40rpx;
+			margin-bottom: 31rpx;
+
+			.dy_tit {
+				font-size: 36rpx;
+				font-weight: 500;
+			}
+
+			.dy_imgs {
+				width: 280rpx;
+				height: 280rpx;
+				border-radius: 20rpx;
+				margin: 40rpx 0 16rpx 0;
+			}
+
+			.dy_distance {
+				font-size: 22rpx;
+				color: #666666;
+			}
+		}
+
+		.dy_action {
+			padding-left: 112rpx;
+			justify-content: space-between;
+
+			.action {
+				font-size: 24rpx;
+
+				.ac_icon {
+					width: 26rpx;
+					height: 26rpx;
+					margin-right: 6rpx;
+				}
+
+				text {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+}
+.no_data {
+	text-align: center;
+
+	.no_data_img {
+		width: 328rpx;
+		height: 196rpx;
+		margin: auto;
+		margin-top: 60rpx;
+	}
+
+	text {
+		color: #333333;
+		font-size: 32rpx;
+	}
+}

@@ -1,0 +1,214 @@
+.content {
+	color: #F1CAAB;
+	font-size: 24rpx;
+}
+
+.right_btn {
+	margin: 32rpx;
+	font-size: 28rpx;
+	color: #FFFFFF;
+}
+
+.vip_card {
+	width: 706rpx;
+	height: 355rpx;
+	margin: 52rpx 0rpx 14rpx 0rpx;
+	padding-left: 30rpx;
+}
+
+.already_vip_card{
+	width: 642rpx;
+	background: linear-gradient(221deg, #463C14 0%, #1C0B4E 52%, #2E2812 100%);
+	border-radius: 8rpx;
+	margin: 0 auto;
+	padding: 28rpx 38rpx 40rpx 38rpx;
+	margin-top: 72rpx;
+	.card_info{
+		padding-bottom: 30rpx;
+		border-bottom: 1px solid #E5E5E5;
+	}
+	.avater{
+		width: 104rpx;
+		height: 104rpx;
+		margin-right: 28rpx;
+	}
+	.info{
+		letter-spacing: 0.5px;
+		.info_1{
+			color: #FFFFFF;
+			font-size: 28rpx;
+			margin-bottom: 22rpx;
+		}
+		.in_icon{
+			width: 24rpx;
+			height: 24rpx;
+			margin-right: 10rpx;
+		}
+		.info_2{
+			color: #B2B2B2;
+			font-size: 22rpx;
+		}
+	}
+}
+.expiration_date{
+	margin-top: 30rpx;
+	color: #FFFFFF;
+	font-size: 28rpx;
+	text{
+		font-size: 42rpx;
+	}
+}
+
+.card_bg {
+	padding: 30rpx;
+	background: url(@/static/images/vip/bg5.png) no-repeat left center;
+	background-size: 100% 100%;
+	text-align: center;
+
+	.h2 {
+		font-size: 36rpx;
+		font-weight: 400;
+		margin-bottom: 30rpx;
+	}
+}
+
+.u-row {
+	margin: 40rpx 0;
+}
+
+.card-layout {
+	width: 178rpx;
+	// height: 264rpx;
+	border-radius: 8rpx;
+	background: url(@/static/images/vip/bg3.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+	text-align: center;
+	padding: 54rpx 0 44rpx 0;
+	letter-spacing: 0.5px;
+	margin-right: 28rpx;
+	flex-shrink: 0;
+
+	.top_icon {
+		width: 112rpx;
+		height: 32rpx;
+		position: absolute;
+		top: -10rpx;
+		left: -10rpx;
+	}
+
+	.card_date {
+		font-size: 22rpx;
+	}
+
+	.active_color {
+		color: #46280F;
+	}
+
+	.pay_cash {
+		align-items: baseline;
+		justify-content: center;
+		margin: 10rpx 0;
+
+		.cash {
+			font-size: 48rpx;
+			font-weight: bold;
+		}
+	}
+
+	.active_pay_cash {
+		color: #333333;
+	}
+
+	.old_cash {
+		color: #666666;
+		font-size: 20rpx;
+		margin-bottom: 20rpx;
+		text-decoration: line-through;
+	}
+
+	.cash_day {
+		color: #888888;
+	}
+
+	.active_cash {
+		color: #666666;
+
+		text {
+			color: #333333;
+		}
+	}
+}
+
+.active-card-layout {
+	background: url(@/static/images/vip/bg2.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.pay_note {
+	color: #687FA1;
+	font-size: 20rpx;
+	text-align: left;
+	margin-left: 20rpx;
+	margin-bottom: 10rpx;
+}
+.items{
+	padding: 50rpx 52rpx;
+	flex-wrap: wrap;
+}
+.item{
+	margin: 0 24rpx 40rpx 0;
+	.item_icon{
+		width: 110rpx;
+		height: 110rpx;
+	}
+	.item_text{
+		color: #F1CAAB;
+		font-size: 26rpx;
+		margin-top: 20rpx;
+		margin-bottom: 12rpx;
+	}
+	.item_sub_text{
+		color: #9294AE;
+		font-size: 20rpx;
+	}
+}
+.item:nth-child(4), .item:nth-child(8){
+	margin-right: 0;
+}
+.main{
+	background-color: #3E4055;
+	padding: 48rpx 32rpx;
+	color: #F1CAAB;
+}
+.pay_money{
+	font-size: 24rpx;
+	text{
+		font-size: 46rpx;
+	}
+}
+.right_icon{
+	width: 180rpx;
+	height: 58rpx;
+}
+.bottom{
+	margin-top: 30rpx;
+}
+.pay_icon{
+	width: 156rpx;
+	height: 48rpx;
+	margin-right: 30rpx;
+}
+.ques_note{
+	color: #FFFFFF;
+	font-size: 20rpx;
+	// text-decoration: underline;
+}
+.vip_privilege{
+	font-size: 36rpx;
+	margin-top: 32rpx;
+	margin-left: 32rpx;
+}
+.card_box{
+	margin: 40rpx 0;
+}

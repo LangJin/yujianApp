@@ -1,0 +1,322 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/account/login/Login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/account/login/VerificationCode",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/account/userInfo/ChooseSex",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/account/userInfo/UserInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/index/personal/Personal",
+			"style": {
+				"navigationBarTitleText": "个人主页",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/inform/Inform",
+			"style": {
+				"navigationBarTitleText": "举报",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/inform/InformType",
+			"style": {
+				"navigationBarTitleText": "举报类型",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/dynamic/index",
+			"style": {
+				"navigationBarTitleText": "动态",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/dynamic/addDynamic/AddDynamic",
+			"style": {
+				"navigationBarTitleText": "发布动态",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/vip/VipCenter",
+			"style": {
+				"navigationBarTitleText": "VIP中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/vip/rechargeRecord/RecordList",
+			"style": {
+				"navigationBarTitleText": "充值记录",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/setting/index",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/setting/agreement/Agreement",
+			"style": {
+				"navigationBarTitleText": "软件协议",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/setting/updateInfo/UpdateInfo",
+			"style": {
+				"navigationBarTitleText": "修改资料",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/setting/interest/Interests",
+			"style": {
+				"navigationBarTitleText": "选择兴趣",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/feedback/Feedback",
+			"style": {
+				"navigationBarTitleText": "问题反馈",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/mine/callcenter/CallCenter",
+			"style": {
+				"navigationBarTitleText": "客服中心",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+		{
+			"path": "pages/mine/myDynamic/MyDynamic",
+			"style": {
+				"navigationBarTitleText": "我的动态",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/mine/wallet/Wallet",
+			"style": {
+				"navigationBarTitleText": "钱包",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/setting/accountSecurity/AccountSecurity",
+			"style": {
+				"navigationBarTitleText": "账号设置",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/message/index",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"navigationBarBackgroundColor": "#FFFFFF",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/message/favorite/Favorite",
+			"style": {
+				"navigationBarTitleText": "我喜欢",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/message/giveALike/GiveALike",
+			"style": {
+				"navigationBarTitleText": "点赞",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/message/system/SystemNotice",
+			"style": {
+				"navigationBarTitleText": "遇见官方通知",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/message/dialog/DialogBox",
+			"style": {
+				"navigationBarTitleText": "消息对话",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+		{
+			"path": "pages/message/peopleOfSeeMe/PeopleOfSeeMe",
+			"style": {
+				"navigationBarTitleText": "看过我的人",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/invite/InviteCenter",
+			"style": {
+				"navigationBarTitleText": "遇见 - 我的邀请",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/invite/withdraw/WithdrawDeposit",
+			"style": {
+				"navigationBarTitleText": "支付宝提现",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "记录",
+							"fontSize": "14px"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/invite/withdrawRecords/WithdrawCashRecords",
+			"style": {
+				"navigationBarTitleText": "提现记录",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/invite/shareQRCode/QRCode",
+			"style": {
+				"navigationBarTitleText": "遇见 - 分享海报",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/invite/introPosters/IntroPosters",
+			"style": {
+				"navigationBarTitleText": "遇见 - 如何分享",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/download/WeChatDownload",
+			"style": {
+				"navigationBarTitleText": "微信下载",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white",
+				"app-plus": {
+					"titleNView": {
+						"titleText": "遇见 - 交友APP",
+						"autoBackButton": "false",
+						"buttons": [{
+							"type": "close",
+							"float": "left"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/download/RegisterAndDownload",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#29282E",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#333333",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "white",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/images/mine/shouye_grey.png",
+			"selectedIconPath": "static/images/home/icon_shouye.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/dynamic/index",
+			"iconPath": "static/images/home/icon_xuexi.png",
+			"selectedIconPath": "static/images/mine/active_xuexi.png",
+			"text": "动态"
+		}, {
+			"pagePath": "pages/message/index",
+			"iconPath": "static/images/home/icon_xiaoxi.png",
+			"selectedIconPath": "static/images/mine/active_xiaoxi.png",
+			"text": "消息"
+		}, {
+			"pagePath": "pages/mine/index",
+			"iconPath": "static/images/home/icon_wode.png",
+			"selectedIconPath": "static/images/mine/active_wode.png",
+			"text": "我的"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
