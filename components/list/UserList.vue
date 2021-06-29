@@ -2,15 +2,15 @@
 	<view class="l_box">
 		<view class="l_item d_flex" v-for="(item, index) in userList" :key="index" @click="toPersonalPage(item.id)">
 			<view class="item_left">
-				<image :class="item.gender === gender ? 'image_blur': ''" v-if="item.avatarUrl" :src="item.avatarUrl"
-					mode=""></image>
-				<image :class="item.gender === gender ? 'image_blur': ''" v-else src="@/static/images/home/logo.png"
-					mode=""></image>
+				<image :class="item.gender === gender && isVip === 2 ? 'image_blur': ''" v-if="item.avatarUrl"
+					:src="item.avatarUrl" mode=""></image>
+				<image :class="item.gender === gender && isVip === 2? 'image_blur': ''" v-else
+					src="@/static/images/home/logo.png" mode=""></image>
 			</view>
 			<view class="item_right">
 				<view class="r_top d_flex flex_betewwen">
 					<view class="top_l d_flex">
-						<view>{{ item.nickName }}</view> 
+						<view class="name">{{ item.nickName }}</view>
 						<view class="top_icon_vip" v-if="item.isVip === 1">
 							<image src="@/static/images/home/icon_vip.png" mode=""></image>
 						</view>
@@ -70,12 +70,16 @@
 			userList: {
 				type: Array,
 				default: () => {}
-			}
+			},
+			isVip: undefined
 		},
 		data() {
 			return {
 
 			}
+		},
+		onShow() {
+			this.isVip = uni.getStorageSync('isVip') ? Number(uni.getStorageSync('isVip')) : undefined;
 		},
 		methods: {
 			//去个人主页
@@ -114,12 +118,22 @@
 				font-size: 36rpx;
 				font-weight: bold;
 				align-items: center;
+				flex-shrink: 0;
+
+				.name {
+					max-width: 220rpx;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
+					letter-spacing: 0;
+				}
 
 				.top_icon_vip {
 					width: 32rpx;
 					height: 32rpx;
 					margin-left: 20rpx;
-					image{
+
+					image {
 						margin-bottom: 20rpx;
 					}
 				}
@@ -135,6 +149,10 @@
 				color: #999999;
 				font-size: 24rpx;
 			}
+		}
+
+		.top_r {
+			flex-shrink: 0;
 		}
 	}
 

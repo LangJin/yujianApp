@@ -97,6 +97,7 @@
 			}
 		},
 		onPullDownRefresh() {
+			this.pageNum = 1;
 			this.getChatUserList();
 		},
 		onReachBottom() {
@@ -112,7 +113,11 @@
 						result.map(function(value) {
 							value.show = false;
 						})
-						this.list = this.list.concat(result);
+						if (this.pageNum == 1) {
+							this.list = result;
+						} else {
+							this.list = this.list.concat(result);
+						}
 					}
 					uni.stopPullDownRefresh();
 				})
@@ -180,12 +185,14 @@
 </script>
 
 <style lang="scss" scoped>
-	.content{
+	.content {
 		padding-bottom: 30rpx;
 	}
-	.main{
+
+	.main {
 		padding-bottom: 30rpx;
 	}
+
 	.top_btns {
 		justify-content: space-around;
 		padding: 10rpx 0;

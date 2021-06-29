@@ -176,7 +176,7 @@
 				relationList: [{
 					value: '单身',
 					label: '单身'
-				},{
+				}, {
 					value: '离异',
 					label: '离异'
 				}],
@@ -272,13 +272,13 @@
 				let imgs = this.getAlbumUploadList();
 				this.form.photos = imgs.concat(this.form.photos);
 				this.form.id = this.user.id;
-				
+
 				this.$api.saveUserInfo(this.form).then(res => {
 					if (res.code == 1) {
 						this.$u.toast(res.msg);
 						let pages = getCurrentPages();
 						let beforePage = pages[pages.length - 2];
-						if(beforePage && beforePage.route == 'pages/mine/index'){
+						if (beforePage && beforePage.route == 'pages/mine/index') {
 							// #ifdef H5
 							beforePage.getUserInfo();
 							// #endif
@@ -286,11 +286,11 @@
 							beforePage.$vm.getUserInfo();
 							// #endif
 						}
-						setTimeout(() => {
-							uni.switchTab({
-								url: '../../mine/index'
-							})
-						}, 1000)
+						// setTimeout(() => {
+						// 	uni.switchTab({
+						// 		url: '../../mine/index'
+						// 	})
+						// }, 1000)
 					}
 				})
 			},
@@ -300,7 +300,7 @@
 				this.$refs.uUpload.clear();
 				this.form.avatarUrl = imgUrl;
 			},
-			onRemove(index, lists){
+			onRemove(index, lists) {
 				this.form.photos.splice(index, 1);
 			},
 			onErrors(res) {
@@ -358,6 +358,7 @@
 			},
 			//兴趣爱好
 			toInterestList() {
+				this.saveUserInfo();
 				uni.navigateTo({
 					url: '../interest/Interests'
 				})

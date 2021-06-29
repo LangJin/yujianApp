@@ -1,7 +1,9 @@
 <template>
 	<u-modal v-model="show" width="626" class="c_modal" :show-title="false" :show-confirm-button="false">
 		<view class="PaymentWay">
-			<view style="height: 24rpx;"></view>
+			<view class="close_btn">
+				<u-icon name="close-circle" color="#E6E6E6" size="48" @click="close"></u-icon>
+			</view>
 			<view class="pay_con">
 				<view class="con_title">
 					需支付金额（元）
@@ -16,7 +18,7 @@
 				</view>
 				<view class="pay_con">
 					<u-radio-group v-model="payIndex" size="50" icon-size="30" active-color="#B46628">
-						<view class="pay_item">
+						<!-- <view class="pay_item">
 							<view class="pay_icon">
 								<image src="@/static/images/vip/alipay.png" mode=""></image>
 							</view>
@@ -32,7 +34,7 @@
 							<view class="choose_icon">
 								<u-radio name="2"></u-radio>
 							</view>
-						</view>
+						</view> -->
 						<view class="pay_item">
 							<view class="pay_icon">
 								<image src="@/static/images/vip/weChat.png" mode=""></image>
@@ -72,12 +74,14 @@
 				payIndex: '1'
 			}
 		},
-		onLoad() {
-		},
+		onLoad() {},
 		methods: {
+			close() {
+				this.$emit('close');
+			},
 			toNext() {
 				this.$emit("toNext", this.payIndex);
-				
+
 				// let _self = this;
 				// this.params.type = this.payIndex;
 				// // 微信支付
@@ -216,5 +220,12 @@
 		/deep/.btn {
 			width: 520rpx;
 		}
+	}
+
+	.close_btn {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 20rpx;
+		margin-right: 20rpx;
 	}
 </style>

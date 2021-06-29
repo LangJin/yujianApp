@@ -22,8 +22,10 @@
 				<view class="dy_tit">
 					{{ item.content }}
 				</view>
-				<view class="dy_imgs" v-for="(photo, p) in item.photos" :key="p">
-					<image :src="photo" mode=""></image>
+				<view class="dy_imgs_box d_flex flex_betewwen">
+					<view class="dy_imgs" v-for="(photo, p) in item.photos" :key="p">
+						<image :src="photo" mode="" @tap="_previewImage(item.photos, p)"></image>
+					</view>
 				</view>
 				<view class="dy_distance">
 					<u-icon name="map" size="20"></u-icon> {{ item.city }}· {{ item.distance }}km
@@ -79,17 +81,21 @@
 			actionMore() {
 				this.actionMoreShow = true;
 			},
+			//
 			actionMoreClick() {
 				uni.navigateTo({
 					url: '/pages/index/inform/Inform'
 				})
 			},
+			//删除
 			del(id) {
 				this.$emit('del', id);
 			},
+			//喜欢
 			likeClick(id) {
 				this.$emit('likeClick', id);
 			},
+			//打招呼
 			sayHello(userId) {
 				this.$emit('sayHello', userId);
 			},
@@ -98,7 +104,20 @@
 				uni.navigateTo({
 					url: `/pages/index/personal/Personal?id=${userId}`,
 				})
-			}
+			},
+			//多图预览
+			_previewImage(photos, index) {
+				let idx = index;
+				let imgs = photos.map((item, index) => {
+					return item;
+				});
+				if (imgs && imgs.length > 0) {
+					uni.previewImage({
+						current: imgs[idx],
+						urls: imgs
+					});
+				}
+			},
 		}
 	}
 </script>

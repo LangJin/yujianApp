@@ -58,14 +58,15 @@
 				this.gender = user.gender;
 			}
 			this.init();
-			
+
 			let pages = getCurrentPages();
 			let beforePage = pages[pages.length - 2];
-			if(beforePage && beforePage.route.indexOf('UserInfo') > 1){
+			if (beforePage && beforePage.route.indexOf('UserInfo') > 1) {
 				this.welcomeShow = true;
 			}
 		},
 		onPullDownRefresh() {
+			this.pageNum = 1;
 			this.getHomeUserList();
 		},
 		onReachBottom() {
@@ -88,9 +89,9 @@
 			getHomeUserList() {
 				this.$api.homeUserList(this.current, this.pageSize, this.pageNum).then(res => {
 					if (res.code == 1) {
-						if(this.pageNum == 1){
+						if (this.pageNum == 1) {
 							this.userList = res.data;
-						}else{
+						} else {
 							this.userList = this.userList.concat(res.data);
 						}
 						this.totalPageNum = res.pagination.totalPages;
@@ -113,7 +114,7 @@
 				console.log(e);
 			},
 			//加载更多
-			loadmore(){
+			loadmore() {
 				if (this.pageNum >= this.totalPageNum) return;
 				this.status = 'loading';
 				this.pageNum++;
@@ -124,7 +125,7 @@
 				}, 2000)
 			},
 			//关闭欢迎弹窗
-			welcomeClose(){
+			welcomeClose() {
 				this.welcomeShow = false;
 			}
 		}
@@ -132,9 +133,10 @@
 </script>
 
 <style lang="scss" scoped>
-	.content{
+	.content {
 		padding-bottom: 30rpx;
 	}
+
 	.slot-wrap {
 		display: flex;
 		justify-content: center;

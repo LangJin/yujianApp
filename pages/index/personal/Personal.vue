@@ -47,7 +47,7 @@
 				<view v-if="current === 0" class="resource">
 					<view class="res_item">
 						<view class="title">查看微信</view>
-						<view class="chat_img">
+						<view class="chat_img" @click="toVipCenter">
 							<image src="@/static/images/home/icon_bg.png" mode=""></image>
 						</view>
 					</view>
@@ -57,7 +57,8 @@
 							scroll-with-animation="true">
 							<view class="albums d_flex">
 								<view class="photo" v-for="(photo, index) in userInfo.photos" :key="index">
-									<image :src="photo" :class="gender === userInfo.gender ? 'image_blur': ''" mode="">
+									<image :src="photo" :class="gender === userInfo.gender && isVip === 2 ? 'image_blur': ''" mode=""
+										@tap="_previewImage(userInfo.photos, index)">
 									</image>
 									<view class="hot_icon">
 										<image src="@/static/images/home/icon_huo.png" mode=""></image>
@@ -229,13 +230,15 @@
 				}
 			}
 		},
+		onShow() {
+			this.isVip = uni.getStorageSync('isVip') ? Number(uni.getStorageSync('isVip')) : undefined;
+		},
 		methods: {
 			init() {
 				let user = uni.getStorageSync('loginUser') ? uni.getStorageSync('loginUser') : undefined;
 				if (user !== undefined) {
 					this.gender = user.gender;
 				}
-				this.isVip = uni.getStorageSync('isVip') ? uni.getStorageSync('isVip') : undefined;
 				this.getUserdetails();
 			},
 			//获取用户资料
@@ -322,7 +325,26 @@
 				uni.navigateTo({
 					url: `../../message/dialog/DialogBox?id=${userId}`
 				})
-			}
+			},
+			//to vip中心
+			toVipCenter() {
+				uni.navigateTo({
+					url: '../../vip/VipCenter'
+				})
+			},
+			//多图预览
+			_previewImage(photos, index) {
+				let idx = index;
+				let imgs = photos.map((item, index) => {
+					return item;
+				});
+				if (imgs && imgs.length > 0) {
+					uni.previewImage({
+						current: imgs[idx],
+						urls: imgs
+					});
+				}
+			},
 		},
 	}
 </script>

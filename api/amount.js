@@ -9,5 +9,8 @@ export const userWithdrawalRecordList = (pageSize, pageNum) => http.globalReques
 //保存用户提现记录
 export const saveUserWithdrawalRecord = (params) => http.globalRequest(`/open/amount/saveUserWithdrawalRecord`, 'POST', params);
 
-//创建订单
+//创建订单(支付)
 export const createOrder = (params) => http.globalRequest(`/open/order/createOrder`, 'POST', params);
+
+//用户充值记录
+export const rechargeRecordList = (pageSize, pageNum) => http.globalRequest(`/open/amount/listUserRechargeRecord/${pageSize}/${pageNum}`, 'POST');

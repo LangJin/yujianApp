@@ -20,13 +20,13 @@
 							<view class="in_icon">
 								<image src="@/static/images/home/icon_vip.png" mode=""></image>
 							</view>
-							<text>{{ info.vipEndTime }} 到期</text>
+							<text>{{ info.vipEndTime | date('yyyy-mm-dd') }} 到期</text>
 						</view>
 					</view>
 				</view>
-				<view class="expiration_date">距离会员到期还有 <text>12</text> 天</view>
+				<view class="expiration_date">距离会员到期还有 <text>{{info.vipDays}}</text> 天</view>
 			</view>
-			<view v-show="info.isVip === 2" class="card_bg">
+			<view class="card_bg">
 				<view class="h2">开通会员畅享海量内容</view>
 				<view class="sub_h4">全站海量内容尽享</view>
 				<scroll-view scroll-x="true" class="scroll-view-x" scroll-with-animation="true">
@@ -62,11 +62,11 @@
 		</view>
 
 		<!-- 支付弹窗 -->
-		<payment-way :show="paymentShow" :totalMoney="totalMoney" @toNext="handlePay"></payment-way>
+		<payment-way :show="paymentShow" :totalMoney="totalMoney" @toNext="handlePay" @close="handleClose">
+		</payment-way>
 
 		<!-- 支付成功 -->
-		<success-modal :show="sucessShow" :isVip="info.isVip" :msg="info.isVip === 1 ? '继续享受会员服务':'马上享受会员服务'"
-			@close="successClose"></success-modal>
+		<success-modal :show="sucessShow" :info="info" msg="马上享受会员服务" @close="successClose"></success-modal>
 
 		<!-- 支付失败 -->
 		<fail-modal :show="failShow" @close="failClose"></fail-modal>
@@ -187,6 +187,7 @@
 					if (res.code == 1) {
 						let data = res.data[0];
 						this.info = data;
+						uni.setStorageSync('isVip', data.isVip);
 					}
 				})
 			},
@@ -210,15 +211,17 @@
 				this.totalMoney = this.cardList[index].dicValue;
 				this.paymentShow = true;
 			},
-			//支付
+			//支付弹窗  支付
 			handlePay(payIndex) {
 				let _self = this;
-				this.params.money = totalMoney;
+				this.params.money = this.totalMoney;
 				// 微信支付
 				if (Number(payIndex) == 1) {
 					this.$api.createOrder(this.params).then(res => {
+						this.paymentShow = false;
 						WXPayApp(res.data[0]).then(res => {
 							_self.sucessShow = true;
+							_self.getUserInfo();
 						}).catch(e => {
 							_self.failShow = true;
 						})
@@ -229,9 +232,15 @@
 					return false;
 				}
 			},
+			//支付弹窗  关闭
+			handleClose() {
+				this.paymentShow = false;
+			},
+			//支付成功弹窗
 			successClose() {
 				this.sucessShow = false;
 			},
+			//支付失败弹窗
 			failClose() {
 				this.failShow = false;
 			}

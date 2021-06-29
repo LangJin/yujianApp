@@ -225,12 +225,17 @@
 				font-size: 36rpx;
 				font-weight: 500;
 			}
-
+			.dy_imgs_box{
+				flex-wrap: wrap;
+			}
 			.dy_imgs {
 				width: 280rpx;
 				height: 280rpx;
 				border-radius: 20rpx;
 				margin: 40rpx 0 16rpx 0;
+				image{
+					border-radius: 20rpx;
+				}
 			}
 
 			.dy_distance {

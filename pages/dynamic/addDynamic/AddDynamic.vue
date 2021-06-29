@@ -21,6 +21,10 @@
 
 <script>
 	import upload from '@/config/uploadFile.js'
+	import {
+		putObject,
+		renameFile
+	} from "@/utils/upload.js";
 	export default {
 		data() {
 			return {
@@ -81,6 +85,9 @@
 				}
 				return nameFiles;
 			},
+			onChange(res, index, lists, name){
+				console.log(res, index, lists, name)
+			}
 		}
 	}
 </script>

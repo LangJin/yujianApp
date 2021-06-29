@@ -9,7 +9,7 @@
 			</u-action-sheet>
 		</u-navbar>
 		<view class="main">
-			<view class="top_icon">
+			<view class="top_icon" @click="toVipCenter">
 				<image src="@/static/images/message/icon_bg.png" mode=""></image>
 			</view>
 			<view class="chat_note">
@@ -131,7 +131,6 @@
 						this.info = result;
 						this.userName = result.toUserVO.nickName;
 						this.messageList = result.messageVO;
-						console.log(this.info)
 					}
 				})
 			},

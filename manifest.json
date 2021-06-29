@@ -54,7 +54,7 @@
                 "ad" : {},
                 "payment" : {
                     "weixin" : {
-                        "__platform__" : [ "android" ],
+                        "__platform__" : [ "ios", "android" ],
                         "appid" : "wx55278d4c65cad0da",
                         "UniversalLinks" : ""
                     }

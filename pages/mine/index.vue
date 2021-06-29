@@ -55,12 +55,15 @@
 				</view>
 			</view>
 			<view class="photos d_flex flex_betewwen">
-				<view>我的相册与视频</view>
-				<u-upload :custom-btn="true" ref="uUpload" :show-upload-list="showUploadList" :action="action"
-					name="upload" :header="header" @on-success="onSuccess">
+				<view>我的相册</view>
+				<!-- <view class="">
+					上传图片
+				</view> -->
+				<u-upload :custom-btn="true" ref="uUpload" :show-upload-list="showUploadList" name="upload"
+					:header="header" @on-success="onSuccess" :beforeUpload="beforeUpload">
 					<view slot="addBtn" class="d_flex" hover-class="slot-btn__hover" hover-stay-time="150">
 						<u-icon size="28" name="../../static/images/mine/icon_shangchuan.png"></u-icon>
-						<text style="margin-left: 10rpx;">上传相册/视频</text>
+						<text style="margin-left: 10rpx;">上传图片</text>
 					</view>
 				</u-upload>
 			</view>
@@ -139,6 +142,10 @@
 <script>
 	import indexBackgroundImage from '@/static/images/mine/bg11.png'
 	import CommonModal from '@/components/publishModal/PublishModal.vue'
+	import {
+		putObject,
+		renameFile
+	} from '@/utils/upload.js'
 	import upload from '@/config/uploadFile.js'
 
 	export default {
@@ -195,10 +202,7 @@
 			}
 		},
 		onShow() {
-			let isVip = uni.getStorageSync('isVip') ? uni.getStorageSync('isVip') : undefined;
-			if (isVip !== undefined) {
-				this.vipShow = isVip === 1 ? false : true;
-			}
+			this.getUserInfo();
 		},
 		onPullDownRefresh() {
 			this.getUserInfo();
@@ -211,6 +215,7 @@
 						this.info = data;
 						this.imgs = this.info.photos;
 						uni.setStorageSync('info', data);
+						uni.setStorageSync('isVip', data.isVip);
 					}
 					uni.stopPullDownRefresh();
 				})
@@ -270,21 +275,16 @@
 				})
 			},
 			//上传图片
-			onSuccess(data) {
-				if (data.code == 1) {
-					this.imgs.push(data.data[0]);
-					let params = {
-						id: this.info.id,
-						photos: this.imgs,
-					}
-					this.$api.saveUserInfo(params).then(res => {
-						if (res.code == 1) {
-							this.$u.toast('保存成功');
-							this.getUserInfo();
-						}
-					})
-				}
-			},
+			// onSuccess(data) {
+			// 	if (data.code == 1) {
+			// 		this.imgs.push(data.data[0]);
+			// 		let params = {
+			// 			id: this.info.id,
+			// 			photos: this.imgs,
+			// 		}
+
+			// 	}
+			// },
 			//多图预览
 			_previewImage(index) {
 				let idx = index;
@@ -298,6 +298,7 @@
 					});
 				}
 			},
+			//单图预览
 			_previewSingleImage(image) {
 				let imgArr = [];
 				imgArr.push(image);
@@ -306,7 +307,31 @@
 					urls: imgArr,
 					current: imgArr[0]
 				});
-			}
+			},
+			//上传前钩子
+			beforeUpload(index, list) {
+				console.log(index, list);
+				this.uploadImg(list[index].file);
+			},
+			//上传图片
+			uploadImg(info) {
+				const newFile = renameFile(info);
+				putObject(newFile).then((res) => {
+					if (res.statusCode == 200) {
+						this.imgs.push("http://" + res.Location);
+						let params = {
+							id: this.info.id,
+							photos: this.imgs,
+						}
+						this.$api.saveUserInfo(params).then(res => {
+							if (res.code == 1) {
+								this.$u.toast('保存成功');
+								this.getUserInfo();
+							}
+						})
+					}
+				});
+			},
 		}
 	}
 </script>
