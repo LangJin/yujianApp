@@ -11,7 +11,7 @@
 				</u-form-item>
 				<u-form-item>
 					<u-upload ref="uUpload" :action="action" name="upload" :header="header" :file-list="fileList"
-						max-count="9">
+						max-count="9" >
 					</u-upload>
 				</u-form-item>
 			</u-form>
@@ -21,10 +21,6 @@
 
 <script>
 	import upload from '@/config/uploadFile.js'
-	import {
-		putObject,
-		renameFile
-	} from "@/utils/upload.js";
 	export default {
 		data() {
 			return {
@@ -51,6 +47,7 @@
 			}
 		},
 		methods: {
+			//发布
 			handlePublish() {
 				if (this.form.content == '' || this.form.content.length <= 0) {
 					this.$u.toast('请输入发布内容');
@@ -73,20 +70,17 @@
 					}
 				})
 			},
+			//获取图片路径
 			getFileList() {
 				let fileList = [];
 				let nameFiles = [];
 				fileList = this.$refs.uUpload.lists.filter(val => {
 					return val.progress == 100;
 				})
-				console.log(this.fileList)
 				for (let i = 0; i < fileList.length; i++) {
 					nameFiles.push(fileList[i].response.data[0]);
 				}
 				return nameFiles;
-			},
-			onChange(res, index, lists, name){
-				console.log(res, index, lists, name)
 			}
 		}
 	}

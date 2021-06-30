@@ -45,7 +45,7 @@
 					inactive-color="#888888" active-color="#B46628" bar-width="44" fontSize="28"></u-tabs>
 				<!-- 资料 -->
 				<view v-if="current === 0" class="resource">
-					<view class="res_item">
+					<view class="res_item" v-if="isVip === 2">
 						<view class="title">查看微信</view>
 						<view class="chat_img" @click="toVipCenter">
 							<image src="@/static/images/home/icon_bg.png" mode=""></image>
@@ -235,6 +235,7 @@
 		},
 		methods: {
 			init() {
+				this.isVip = uni.getStorageSync('isVip') ? Number(uni.getStorageSync('isVip')) : undefined;
 				let user = uni.getStorageSync('loginUser') ? uni.getStorageSync('loginUser') : undefined;
 				if (user !== undefined) {
 					this.gender = user.gender;

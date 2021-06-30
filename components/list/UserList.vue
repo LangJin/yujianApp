@@ -71,15 +71,16 @@
 				type: Array,
 				default: () => {}
 			},
-			isVip: undefined
+			isVip: Number
 		},
 		data() {
 			return {
-
+				
 			}
 		},
 		onShow() {
 			this.isVip = uni.getStorageSync('isVip') ? Number(uni.getStorageSync('isVip')) : undefined;
+			console.log(this.isVip)
 		},
 		methods: {
 			//去个人主页

@@ -17,3 +17,6 @@ export const saveDynamic = (params) => http.globalRequest(`/open/homepage/saveDy
 
 //删除动态
 export const deleteDynamic = (dynamicId) => http.globalRequest(`/open/homepage/deleteDynamic/${dynamicId}`, 'POST')
+
+//刷新用户信息
+export const userListFlash = () => http.globalRequest(`/open/homepage/flashUserMessage`, 'POST')

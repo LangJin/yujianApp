@@ -12,7 +12,7 @@
 				<image :src="headUrl"></image>
 				<u-upload :action="action" ref="uUpload" max-count="1" :header="header" :file-list="fileList"
 					width="120" height="120" border-radius="50%" upload-text="" :show-progress="false"
-					:deletable="false" name="upload" :before-upload="beforeUpload" max-size="10*1024*1024"
+					:deletable="false" name="upload" :beforeUpload="beforeUpload" max-size="10*1024*1024"
 					@on-success="onSuccess" @on-error="onErrors"></u-upload>
 				<view class="pic_icon">
 					<image src="@/static/images/mine/camera.png" mode=""></image>
@@ -115,8 +115,8 @@
 				<view class="h2">相册</view>
 				<view class="cut_line"></view>
 				<u-form-item prop="albums">
-					<u-upload ref="albUpload" :action="action" :file-list="albumList" :max-size="5 * 1024 * 1024"
-						name="upload" upload-text="" max-count="9" @on-remove="onRemove">
+					<u-upload ref="albUpload" :action="action" :header="header" :file-list="albumList"
+						:max-size="5 * 1024 * 1024" name="upload" upload-text="" max-count="9" @on-remove="onRemove">
 					</u-upload>
 				</u-form-item>
 			</view>
@@ -286,11 +286,6 @@
 							beforePage.$vm.getUserInfo();
 							// #endif
 						}
-						// setTimeout(() => {
-						// 	uni.switchTab({
-						// 		url: '../../mine/index'
-						// 	})
-						// }, 1000)
 					}
 				})
 			},
@@ -363,6 +358,7 @@
 					url: '../interest/Interests'
 				})
 			},
+			//获取相册上传列表
 			getAlbumUploadList() {
 				let fileList = [];
 				let nameFiles = [];

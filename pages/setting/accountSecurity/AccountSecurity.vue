@@ -28,8 +28,12 @@
 					fontSize: '28rpx'
 				},
 				show: false,
-				content: '注销账号后所有信息将会抹除，确认注销？'
+				content: ''
 			}
+		},
+		onLoad() {
+			let phone = uni.getStorageSync("phone");
+			this.content = `确定注销 ${phone} 吗？`;
 		},
 		methods: {
 			logout() {
@@ -45,5 +49,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+.content{
+	letter-spacing: 0px;
+}
 </style>

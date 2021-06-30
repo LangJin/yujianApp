@@ -59,11 +59,11 @@
 				<!-- <view class="">
 					上传图片
 				</view> -->
-				<u-upload :custom-btn="true" ref="uUpload" :show-upload-list="showUploadList" name="upload"
-					:header="header" @on-success="onSuccess" :beforeUpload="beforeUpload">
+				<u-upload :custom-btn="true" ref="uUpload" :show-upload-list="showUploadList" :action="action"
+					name="upload" :header="header" @on-success="onSuccess">
 					<view slot="addBtn" class="d_flex" hover-class="slot-btn__hover" hover-stay-time="150">
 						<u-icon size="28" name="../../static/images/mine/icon_shangchuan.png"></u-icon>
-						<text style="margin-left: 10rpx;">上传图片</text>
+						<text style="margin-left: 10rpx;">上传相册/视频</text>
 					</view>
 				</u-upload>
 			</view>
@@ -142,10 +142,6 @@
 <script>
 	import indexBackgroundImage from '@/static/images/mine/bg11.png'
 	import CommonModal from '@/components/publishModal/PublishModal.vue'
-	import {
-		putObject,
-		renameFile
-	} from '@/utils/upload.js'
 	import upload from '@/config/uploadFile.js'
 
 	export default {
@@ -275,16 +271,21 @@
 				})
 			},
 			//上传图片
-			// onSuccess(data) {
-			// 	if (data.code == 1) {
-			// 		this.imgs.push(data.data[0]);
-			// 		let params = {
-			// 			id: this.info.id,
-			// 			photos: this.imgs,
-			// 		}
-
-			// 	}
-			// },
+			onSuccess(data) {
+				if (data.code == 1) {
+					this.imgs.push(data.data[0]);
+					let params = {
+						id: this.info.id,
+						photos: this.imgs,
+					}
+					this.$api.saveUserInfo(params).then(res => {
+						if (res.code == 1) {
+							this.$u.toast('保存成功');
+							this.getUserInfo();
+						}
+					})
+				}
+			},
 			//多图预览
 			_previewImage(index) {
 				let idx = index;
@@ -307,31 +308,7 @@
 					urls: imgArr,
 					current: imgArr[0]
 				});
-			},
-			//上传前钩子
-			beforeUpload(index, list) {
-				console.log(index, list);
-				this.uploadImg(list[index].file);
-			},
-			//上传图片
-			uploadImg(info) {
-				const newFile = renameFile(info);
-				putObject(newFile).then((res) => {
-					if (res.statusCode == 200) {
-						this.imgs.push("http://" + res.Location);
-						let params = {
-							id: this.info.id,
-							photos: this.imgs,
-						}
-						this.$api.saveUserInfo(params).then(res => {
-							if (res.code == 1) {
-								this.$u.toast('保存成功');
-								this.getUserInfo();
-							}
-						})
-					}
-				});
-			},
+			}
 		}
 	}
 </script>

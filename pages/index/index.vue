@@ -14,7 +14,7 @@
 		<view class="content">
 			<u-tabs :list="list" :is-scroll="false" :current="current" @change="change" inactive-color="#888888"
 				active-color="#B46628" bar-width="44" font-size="32"></u-tabs>
-			<common-list :userList="userList" :flag="true" :gender="gender"></common-list>
+			<common-list :userList="userList" :flag="true" :gender="gender" :isVip="isVip"></common-list>
 			<u-loadmore v-show="userList && userList.length > 20" :status="status" @loadmore="loadmore"></u-loadmore>
 		</view>
 		<welcome-modal :show="welcomeShow" @close="welcomeClose"></welcome-modal>
@@ -49,11 +49,13 @@
 				totalPageNum: 0,
 				gender: undefined,
 				status: 'nomore',
-				welcomeShow: false
+				welcomeShow: false,
+				isVip: undefined,
 			}
 		},
 		onLoad() {
 			let user = uni.getStorageSync('loginUser') ? uni.getStorageSync('loginUser') : undefined;
+			this.isVip = uni.getStorageSync('isVip') ? Number(uni.getStorageSync('isVip')) : undefined;
 			if (user !== undefined) {
 				this.gender = user.gender;
 			}
@@ -111,7 +113,11 @@
 			},
 			//多级联动 -- 确定事件
 			selectConfirm(e) {
-				console.log(e);
+				this.$api.userListFlash().then(res => {
+					if(res.code == 1){
+						this.getHomeUserList();
+					}
+				})
 			},
 			//加载更多
 			loadmore() {

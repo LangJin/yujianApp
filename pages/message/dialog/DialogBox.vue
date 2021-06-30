@@ -9,7 +9,7 @@
 			</u-action-sheet>
 		</u-navbar>
 		<view class="main">
-			<view class="top_icon" @click="toVipCenter">
+			<view class="top_icon" v-if="isVip === 2" @click="toVipCenter">
 				<image src="@/static/images/message/icon_bg.png" mode=""></image>
 			</view>
 			<view class="chat_note">
