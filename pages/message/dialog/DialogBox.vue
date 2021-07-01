@@ -23,7 +23,7 @@
 					{{ item.createTime | timeFrom }}
 				</view>
 				<view class="mar_bott d_flex" v-if="item.userId !== userId">
-					<view class="avater">
+					<view class="avater" @click="toPersonal(info.toUserVO.id)">
 						<image v-if="info.toUserVO.avatarUrl" :src="info.toUserVO.avatarUrl" mode=""></image>
 						<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
 					</view>
@@ -34,7 +34,7 @@
 					</view>
 				</view>
 				<view class="mar_bott self" v-else>
-					<view class="avater">
+					<view class="avater" @click="toPersonal(info.userVO.id)">
 						<image v-if="info.userVO.avatarUrl" :src="info.userVO.avatarUrl" mode=""></image>
 						<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
 					</view>
@@ -182,6 +182,12 @@
 					this.moreList.pop();
 				}
 			},
+			//去个人主页
+			toPersonal(id){
+				uni.navigateTo({
+					url: `../../index/personal/Personal?id=${id}`
+				})
+			}
 		}
 	}
 </script>
