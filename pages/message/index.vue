@@ -11,7 +11,7 @@
 		<view class="main">
 			<view class="items">
 				<u-swipe-action btn-width="140" :show="item.show" :options="options" :index="index"
-					v-for="(item, index) in list" :key="item.userVO.id" @click="deleteClick(item.userVO.id)"
+					v-for="(item, index) in list" :key="item.id" @click="deleteClick(item.userVO.id)"
 					@open="deleteOpen">
 					<view class="item d_flex flex_betewwen" @click="toChatPage(item.userVO.id)">
 						<view class="left d_flex">

@@ -18,7 +18,7 @@
 				</view>
 				<view class="info">
 					<view class="name">{{ info.nickName }}</view>
-					<view class="intro">{{ info.gender === 1 ? '男' : '女' }} · {{ info.age }}岁<text>成都市</text></view>
+					<view class="intro">{{ info.gender === 1 ? '男' : '女' }} · {{ info.age }}岁<text>{{ info.city }}</text></view>
 				</view>
 			</view>
 			<!-- <u-read-more class="note" :toggle="true" :show-height="60" :shadow-style="shadowStyle">
@@ -176,7 +176,8 @@
 					backgroundImage: "none",
 					paddingTop: "0",
 					marginTop: "20rpx"
-				}
+				},
+				city: ''
 			}
 		},
 		onLoad() {
@@ -184,7 +185,6 @@
 			if (user !== null) {
 				this.header.token = user.token;
 			}
-			this.getUserInfo();
 		},
 		onPageScroll(object) {
 			if (object.scrollTop > 50) {
@@ -198,6 +198,7 @@
 			}
 		},
 		onShow() {
+			this.city = uni.getStorageSync('city');
 			this.getUserInfo();
 		},
 		onPullDownRefresh() {

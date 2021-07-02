@@ -31,7 +31,7 @@
 							{{userInfo.gender === 0 ? '未知' : userInfo.gender === 1 ? '男': '女'}} · {{ userInfo.age }}岁
 						</view>
 						<view class="b_label">
-							成都市
+							{{ city }}
 						</view>
 						<view class="b_label" v-if="userInfo.occupation">
 							{{ userInfo.occupation }}
@@ -210,13 +210,15 @@
 				total: 0,
 				isVip: undefined,
 				// albums: [],
-				gender: undefined
+				gender: undefined,
+				city: ''
 			}
 		},
 		onLoad(option) {
 			if (option.id) {
 				this.userId = option.id;
 			}
+			this.city = uni.getStorageSync('city');
 			this.init();
 		},
 		onPageScroll(object) {

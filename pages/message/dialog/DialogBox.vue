@@ -8,41 +8,46 @@
 			<u-action-sheet :list="moreList" v-model="moreShow" :safe-area-inset-bottom="true" @click="moreClick">
 			</u-action-sheet>
 		</u-navbar>
-		<view class="main">
-			<view class="top_icon" v-if="isVip === 2" @click="toVipCenter">
-				<image src="@/static/images/message/icon_bg.png" mode=""></image>
-			</view>
-			<view class="chat_note">
-				<u-read-more :toggle="true" :font-size="18" text-indent="0" :shadowStyle="shadowStyle" :show-height="30"
-					close-text="展开" color="#666666">
-					<rich-text :nodes="content" class="note"></rich-text>
-				</u-read-more>
-			</view>
-			<view class="item_box" v-for="(item, index) in messageList" :key="index">
-				<view class="date">
-					{{ item.createTime | timeFrom }}
-				</view>
-				<view class="mar_bott d_flex" v-if="item.userId !== userId">
-					<view class="avater" @click="toPersonal(info.toUserVO.id)">
-						<image v-if="info.toUserVO.avatarUrl" :src="info.toUserVO.avatarUrl" mode=""></image>
-						<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
+		<view class="main_box">
+			<scroll-view id="scrollview" class="chat-window" scroll-y="true"
+				:style="{height: style.contentViewHeight + 'px'}" :scroll-with-animation="true" :scroll-top="scrollTop">
+				<view class="main">
+					<view class="top_icon" v-if="isVip === 2" @click="toVipCenter">
+						<image src="@/static/images/message/icon_bg.png" mode=""></image>
 					</view>
-					<view class="adverse_box">
-						<view class="de_text">
-							{{ item.content }}
+					<view class="chat_note">
+						<u-read-more :toggle="true" :font-size="18" text-indent="0" :shadowStyle="shadowStyle"
+							:show-height="30" close-text="展开" color="#666666">
+							<rich-text :nodes="content" class="note"></rich-text>
+						</u-read-more>
+					</view>
+					<view class="item_box" v-for="(item, index) in messageList" :key="index">
+						<view class="date">
+							{{ item.createTime | timeFrom }}
+						</view>
+						<view class="mar_bott d_flex" v-if="item.userId !== userId">
+							<view class="avater" @click="toPersonal(info.toUserVO.id)">
+								<image v-if="info.toUserVO.avatarUrl" :src="info.toUserVO.avatarUrl" mode=""></image>
+								<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
+							</view>
+							<view class="adverse_box">
+								<view class="de_text">
+									{{ item.content }}
+								</view>
+							</view>
+						</view>
+						<view class="mar_bott self" v-else>
+							<view class="avater" @click="toPersonal(info.userVO.id)">
+								<image v-if="info.userVO.avatarUrl" :src="info.userVO.avatarUrl" mode=""></image>
+								<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
+							</view>
+							<view class="self_box">
+								{{ item.content }}
+							</view>
 						</view>
 					</view>
 				</view>
-				<view class="mar_bott self" v-else>
-					<view class="avater" @click="toPersonal(info.userVO.id)">
-						<image v-if="info.userVO.avatarUrl" :src="info.userVO.avatarUrl" mode=""></image>
-						<image v-else src="@/static/images/vip/icon_logo.png" mode=""></image>
-					</view>
-					<view class="self_box">
-						{{ item.content }}
-					</view>
-				</view>
-			</view>
+			</scroll-view>
 		</view>
 		<view class="footer d_flex flex_betewwen">
 			<view class="le_icon">
@@ -59,7 +64,8 @@
 				<u-button type="success" class="send_btn" @click="sendMsg">发送</u-button>
 			</view>
 		</view>
-		<chat-modal :show="chatShow" :imageUrl="info.toUserVO.avatarUrl" @close="closeChat" @toVipCenter="toVipCenter"></chat-modal>
+		<chat-modal :show="chatShow" :imageUrl="info.toUserVO.avatarUrl" @close="closeChat" @toVipCenter="toVipCenter">
+		</chat-modal>
 	</view>
 </template>
 
@@ -104,6 +110,13 @@
 				total: 0,
 				isVip: undefined,
 				chatShow: false,
+				style: {
+					pageHeight: 0,
+					contentViewHeight: 0,
+					footViewHeight: 90,
+					mitemHeight: 0
+				},
+				scrollTop: ''
 			}
 		},
 		onLoad(option) {
@@ -111,8 +124,18 @@
 			this.userId = uni.getStorageSync('loginUser') ? uni.getStorageSync('loginUser').id : undefined;
 			this.init();
 		},
+		created() {
+			//获取手机高度信息
+			const res = uni.getSystemInfoSync(); //获取手机可使用窗口高度
+			this.style.pageHeight = res.windowHeight;
+			this.style.contentViewHeight = res.windowHeight - uni.getSystemInfoSync().screenWidth / 750 * (100) -
+				70; //像素   因为给出的是像素高度 然后我们用的是upx  所以换算一下 
+		},
 		onShow() {
 			this.isVip = uni.getStorageSync('isVip') ? uni.getStorageSync('isVip') : undefined;
+		},
+		onReady() {
+			this.scrollToBottom(); //调用回到底部方法
 		},
 		methods: {
 			init() {
@@ -147,6 +170,7 @@
 						if (res.code == 1) {
 							this.getMessageList();
 							this.quesContent = '';
+							this.scrollToBottom();
 						}
 					})
 				}
@@ -183,17 +207,40 @@
 				}
 			},
 			//去个人主页
-			toPersonal(id){
+			toPersonal(id) {
 				uni.navigateTo({
 					url: `../../index/personal/Personal?id=${id}`
 				})
-			}
+			},
+			//定位到聊天最底部
+			scrollToBottom() {
+				let that = this;
+				let query = uni.createSelectorQuery();
+				query.selectAll('.main').boundingClientRect();
+				query.select('#scrollview').boundingClientRect();
+				query.exec((res) => {
+					that.style.mitemHeight = 0;
+					res[0].forEach((rect) => that.style.mitemHeight = that.style.mitemHeight + rect.height +
+						40); //获取所有内部子元素的高度
+						// console.log("mitemHeight", that.style.mitemHeight)
+					// 因为vue的虚拟DOM 每次生成的新消息都是之前的，所以采用异步setTimeout
+					setTimeout(() => {
+						// console.log(11, that.style.mitemHeight > that.style.contentViewHeight)
+						//判断子元素高度是否大于显示高度
+						if (that.style.mitemHeight > (that.style.contentViewHeight - 100)) {
+							//用子元素的高度减去显示的高度就获益获得序言滚动的高度
+							that.scrollTop = that.style.mitemHeight - that.style.contentViewHeight
+							// console.log("scrollTop1:", that.scrollTop)
+						}
+					}, 100)
+				})
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.main {
+	.main_box {
 		height: 83vh;
 		overflow-y: scroll;
 	}

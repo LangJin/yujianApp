@@ -116,7 +116,7 @@
 				<view class="cut_line"></view>
 				<u-form-item prop="albums">
 					<u-upload ref="albUpload" :action="action" :header="header" :file-list="albumList"
-						:max-size="5 * 1024 * 1024" name="upload" upload-text="" max-count="9" @on-remove="onRemove">
+						:max-size="5 * 1024 * 1024" name="upload" upload-text="" @on-remove="onRemove">
 					</u-upload>
 				</u-form-item>
 			</view>

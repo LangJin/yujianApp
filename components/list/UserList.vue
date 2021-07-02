@@ -27,7 +27,7 @@
 							<image src="@/static/images/home/icon_zuobiao.png" mode=""></image>
 						</view>
 						<view class="b_label">
-							{{ item.city ? item.city : '成都市' }}
+							{{ city == undefined ? item.city : city }}
 						</view>
 						<view class="b_label" v-if="item.distance">
 							{{ item.distance }}km
@@ -71,7 +71,8 @@
 				type: Array,
 				default: () => {}
 			},
-			isVip: Number
+			isVip: Number,
+			city: String
 		},
 		data() {
 			return {

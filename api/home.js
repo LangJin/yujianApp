@@ -7,7 +7,7 @@ export const dynamicListByUserId = ( userId, pageSize, pageNum) => http.globalRe
 export const getUserDetails = (userId) => http.globalRequest(`/open/homepage/getUserId/${userId}`, 'POST');
 
 //首页获取用户列表
-export const homeUserList = (type, pageSize, pageNum) => http.globalRequest(`/open/homepage/release/homePageUser/${type}/${pageSize}/${pageNum}`, 'POST');
+export const homeUserList = (type, pageSize, pageNum, gender) => http.globalRequest(`/open/homepage/release/homePageUser/${type}/${pageSize}/${pageNum}/${gender}`, 'POST');
 
 //获取动态列表
 export const dynamicList = (type, gender, pageSize, pageNum) => http.globalRequest(`/open/homepage/listDynamic/${type}/${gender}/${pageSize}/${pageNum}`, 'POST')
@@ -20,3 +20,7 @@ export const deleteDynamic = (dynamicId) => http.globalRequest(`/open/homepage/d
 
 //刷新用户信息
 export const userListFlash = () => http.globalRequest(`/open/homepage/flashUserMessage`, 'POST')
+
+//获取地址信息
+export const getAddressLocation = (params) => http.globalRequest(`/sass/common/release/getAddressLocation`, 'POST', params)
+
